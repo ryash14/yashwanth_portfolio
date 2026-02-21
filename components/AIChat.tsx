@@ -322,10 +322,15 @@ export default function AIChat() {
 
     // Response goes to pendingAnswer — revealed when game ends or skipped
     try {
+      // Build conversation history (skip welcome msg, skip streaming placeholders)
+      const history = messages
+        .filter(m => m.id !== "welcome" && !m.streaming)
+        .map(m => ({ role: m.role, content: m.content }));
+
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: text.trim() }),
+        body: JSON.stringify({ message: text.trim(), history }),
       });
       const data = await res.json();
       const content = data.error
