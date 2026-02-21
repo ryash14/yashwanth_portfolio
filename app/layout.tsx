@@ -33,7 +33,7 @@ const dancingScript = Dancing_Script({
   weight: ["700"],
 });
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://yashwanthreddygari.dev";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://yashwanth.live";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

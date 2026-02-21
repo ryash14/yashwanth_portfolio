@@ -111,11 +111,17 @@ AWS Cloud Foundations, Generative AI Virtual Internship, Frontend Web Developmen
 Always answer every part of a multi-part question. If asked about skills AND projects AND experience, answer ALL three. Never truncate. If asked about personal life, share the personal details above warmly and naturally.`;
 
 // ── API key pool ─────────────────────────────────────────────────────────────
-const API_KEYS = [
-  process.env.GEMINI_API_KEY1,
-  process.env.GEMINI_API_KEY2,
-  process.env.GEMINI_API_KEY3,
-].filter(Boolean) as string[];
+// Supports numbered keys (GEMINI_API_KEY1/2/3) and legacy single key names
+// Built inside the handler so env vars are read fresh on every request
+function getApiKeys(): string[] {
+  return [
+    process.env.GEMINI_API_KEY1,
+    process.env.GEMINI_API_KEY2,
+    process.env.GEMINI_API_KEY3,
+    process.env.GEMINI_API_KEY,
+    process.env.GEMINI_API,
+  ].filter(Boolean) as string[];
+}
 
 // ── Static fallback responses (used when all API keys fail) ──────────────────
 const FALLBACKS: { pattern: RegExp; response: string }[] = [
@@ -220,13 +226,15 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Empty message" }, { status: 400 });
   }
 
-  if (API_KEYS.length === 0) {
+  const apiKeys = getApiKeys();
+
+  if (apiKeys.length === 0) {
     return NextResponse.json({ response: getFallbackResponse(message) });
   }
 
   // Try each API key; on 429 or error rotate to the next key
-  for (let keyIdx = 0; keyIdx < API_KEYS.length; keyIdx++) {
-    const ai = new GoogleGenAI({ apiKey: API_KEYS[keyIdx] });
+  for (let keyIdx = 0; keyIdx < apiKeys.length; keyIdx++) {
+    const ai = new GoogleGenAI({ apiKey: apiKeys[keyIdx] });
 
     for (let attempt = 0; attempt < 2; attempt++) {
       try {

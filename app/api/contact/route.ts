@@ -125,7 +125,7 @@ ${message.replace(/</g, "&lt;").replace(/>/g, "&gt;")}
                   </p>
                 </td>
                 <td align="right">
-                  <p style="margin:0;font-size:9px;color:#2a2a2a;font-family:monospace;">yashwanth.dev</p>
+                  <p style="margin:0;font-size:9px;color:#2a2a2a;font-family:monospace;">yashwanth.live</p>
                 </td>
               </tr>
             </table>
