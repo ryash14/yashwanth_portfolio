@@ -156,17 +156,13 @@ export default function Footer() {
               style={{
                 display: "flex", alignItems: "center", gap: 5,
                 border: "none", background: "transparent", cursor: "pointer",
-                color: "var(--text-3)", transition: "color 0.2s",
-                fontFamily: "var(--font-mono)", fontSize: 9,
+                color: "var(--text-2)", transition: "color 0.2s",
+                fontFamily: "var(--font-mono)", fontSize: 10,
                 letterSpacing: "0.12em", textTransform: "uppercase", padding: 0,
               }}
-              onMouseEnter={e => (e.currentTarget as HTMLButtonElement).style.color = "var(--text-2)"}
-              onMouseLeave={e => (e.currentTarget as HTMLButtonElement).style.color = "var(--text-3)"}>
-              Back to top
-              <svg width="9" height="9" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" strokeWidth="2.5">
-                <polyline points="18,15 12,9 6,15" />
-              </svg>
+              onMouseEnter={e => (e.currentTarget as HTMLButtonElement).style.color = "var(--text)"}
+              onMouseLeave={e => (e.currentTarget as HTMLButtonElement).style.color = "var(--text-2)"}>
+              ↑ Back to top
             </button>
           </div>
         </div>

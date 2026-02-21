@@ -303,7 +303,10 @@ export default function AIChat() {
         content: `Hi, I am an AI built to answer questions about **${siteConfig.name}**.\n\nAsk about skills, projects, experience, or how to get in touch.`,
       }]);
     }
-    if (open) setTimeout(() => inputRef.current?.focus(), 300);
+    // Only auto-focus on pointer devices — prevents keyboard popping up on mobile
+    if (open && window.matchMedia("(pointer: fine)").matches) {
+      setTimeout(() => inputRef.current?.focus(), 300);
+    }
   }, [open]);
 
   const send = useCallback(async (text: string) => {

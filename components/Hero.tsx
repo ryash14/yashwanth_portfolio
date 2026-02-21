@@ -83,7 +83,7 @@ function ProfileCard() {
         background: "var(--bg)",
       }}>
         <div style={{ display: "flex", gap: 5 }}>
-          {["#3A3A3A", "#3A3A3A", "#3A3A3A"].map((c, i) => (
+          {["var(--border-2)", "var(--border-2)", "var(--border-2)"].map((c, i) => (
             <div key={i} style={{ width: 9, height: 9, borderRadius: "50%", background: c }} />
           ))}
         </div>
@@ -203,13 +203,14 @@ export default function Hero() {
   return (
     <section
       id="hero"
+      className="hero-section"
       style={{
-        height: "100vh",
+        minHeight: "100svh",
         display: "flex", flexDirection: "column",
         justifyContent: "center",
         position: "relative",
         padding: "clamp(88px, 13vh, 128px) 0 clamp(48px, 7vh, 72px)",
-        overflowX: "hidden",
+        overflowX: "clip",
       }}
     >
       {/* Glow — left side */}
@@ -404,6 +405,7 @@ export default function Hero() {
         @media (max-width: 900px) {
           .hero-grid { grid-template-columns: 1fr !important; }
           .hero-card-col { margin-top: 8px; }
+          .hero-section { padding-top: 96px !important; padding-bottom: 48px !important; }
         }
       `}</style>
     </section>
