@@ -210,7 +210,7 @@ const FALLBACKS: { pattern: RegExp; response: string }[] = [
     response: `Outside work, Yashwanth enjoys Badminton, Cricket, and strategic online games. He is based in Hyderabad, driven by curiosity about how AI can solve real-world problems. Known for reliability, focus, and a competitive spirit.`,
   },
 ];
-
+console.log("GEMINI KEY:", process.env.GEMINI_API_KEY);
 function getFallbackResponse(message: string): string {
   for (const { pattern, response } of FALLBACKS) {
     if (pattern.test(message)) return response;
